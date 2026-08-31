@@ -1,0 +1,40 @@
+name: Vita Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: vitasdk/vitasdk:latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install libvita2d
+        run: vdpm libvita2d || true
+
+      - name: Configure
+        working-directory: vita
+        run: cmake -S . -B build
+
+      - name: Build VPK
+        working-directory: vita
+        run: cmake --build build -j2
+
+      - name: Check VPK
+        run: |
+          ls -lah vita/build
+          test -f vita/build/discord_vita.vpk
+
+      - name: Upload VPK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Discord-Vita-v1.7-VPK
+          path: vita/build/discord_vita.vpk
+          if-no-files-found: error
