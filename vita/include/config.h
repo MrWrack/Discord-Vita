@@ -1,0 +1,14 @@
+#pragma once
+
+#define DISCORD_VITA_BACKEND "https://YOUR-DOMAIN.example"
+
+#define DV_MAX_GUILDS 48
+#define DV_GUILD_NAME_MAX 96
+#define DV_GUILD_ICON_MAX 80
+
+#define DV_MAX_CHANNELS 48
+#define DV_CHANNEL_NAME_MAX 96
+
+#define DV_MAX_MESSAGES 24
+#define DV_MESSAGE_AUTHOR_MAX 64
+#define DV_MESSAGE_CONTENT_MAX 384
